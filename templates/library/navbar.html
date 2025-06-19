@@ -24,27 +24,65 @@
 
 
 <div class="bs-example">
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
-        <a href="/" class="navbar-brand">Kaleab`s Library</a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            <div class="navbar-nav">
-                
-
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Library Management System</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            <!-- Admin Navigation -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/addbook"><i class="fa fa-plus-circle"></i> Add Book</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/viewbook"><i class="fa fa-book"></i> View Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/viewstudent"><i class="fa fa-users"></i> View Students</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/viewissuedbook"><i class="fa fa-list"></i> Issued Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/issuebook"><i class="fa fa-handshake-o"></i> Issue Book</a>
+                            </li>
+                        {% else %}
+                            <!-- Student Navigation -->
+                            <li class="nav-item">
+                                <a class="nav-link" href="/viewbook"><i class="fa fa-book"></i> Available Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/viewissuedbookbystudent"><i class="fa fa-list"></i> My Books</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user-circle"></i> {{ user.username }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/profile"><i class="fa fa-user"></i> Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Logout</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <!-- Guest Navigation -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/studentclick"><i class="fa fa-user"></i> Student Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/adminclick"><i class="fa fa-lock"></i> Admin Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
-
-            <div class="navbar-nav">
-                <a href="/" class="nav-item nav-link active">Home</a>
-                <a href="/adminclick" class="nav-item nav-link">Admin</a>
-                <a href="/studentclick" class="nav-item nav-link">Student</a>
-            </div>
-
-
-
-
         </div>
     </nav>
 </div>

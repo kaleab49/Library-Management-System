@@ -1,38 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
+{% load static %}
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin</title>
+    <title>Admin Portal - Library Management System</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    {% include "library/navbar.html" %}
 
-  <style media="screen">
-  .jumbotron{
-    margin-bottom: 0px;
-  }
-  .jumbotron h1{
-    text-align: center;
-  }
-  </style>
-  </head>
-  <body>
-  {% include "library/navbar.html" %}
-<br><br>
-  <div class="jumbotron">
-    <h1 class="display-4">Hello, Admin</h1>
-    <p class="lead">Welcome to Online Library Management System.</p>
-    <hr class="my-4">
-    <p>You can access various features after Login/SignUp.</p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" style="border-radius:0px;" href="adminsignup" role="button">SignUp</a>
-      <a class="btn btn-primary btn-lg" style="border-radius:0px;" href="adminlogin" role="button">Login</a>
-    </p>
-  </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card admin-portal-card fade-in">
+                    <div class="card-header text-center">
+                        <h3 class="mb-0"><i class="fa fa-lock"></i> Admin Portal</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <p class="lead">Welcome to the Library Management System Admin Portal</p>
+                            <p class="text-muted">Please choose an option to continue</p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100 admin-option-card">
+                                    <div class="card-body text-center">
+                                        <i class="fa fa-user-plus fa-3x mb-3 text-primary"></i>
+                                        <h5 class="card-title">New Admin</h5>
+                                        <p class="card-text text-muted">Create a new admin account to manage the library system</p>
+                                        <a href="adminsignup" class="btn btn-primary btn-block admin-option-btn">
+                                            <i class="fa fa-user-plus"></i> Sign Up
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="card h-100 admin-option-card">
+                                    <div class="card-body text-center">
+                                        <i class="fa fa-sign-in fa-3x mb-3 text-success"></i>
+                                        <h5 class="card-title">Existing Admin</h5>
+                                        <p class="card-text text-muted">Login to access your admin dashboard</p>
+                                        <a href="adminlogin" class="btn btn-success btn-block admin-option-btn">
+                                            <i class="fa fa-sign-in"></i> Login
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <a href="/" class="btn btn-outline-secondary">
+                                <i class="fa fa-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% include "library/footer.html" %}
-  </body>
+</body>
 </html>

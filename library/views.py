@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from . import forms,models
 from django.http import HttpResponseRedirect
@@ -8,12 +8,46 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
 from django.core.mail import send_mail
 from librarymanagement.settings import EMAIL_HOST_USER
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def home_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'library/index.html')
+
+def admin_login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            if user.groups.filter(name='ADMIN').exists():
+                login(request, user)
+                return redirect('afterlogin')
+            else:
+                form.add_error(None, "This login is for administrators only.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'library/adminlogin.html', {'form': form})
+
+def student_login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            if user.groups.filter(name='STUDENT').exists():
+                login(request, user)
+                return redirect('afterlogin')
+            else:
+                form.add_error(None, "This login is for students only.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'library/studentlogin.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 #for showing signup/login button for student
 def studentclick_view(request):

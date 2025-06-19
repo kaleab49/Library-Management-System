@@ -17,13 +17,13 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from library import views
-from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.auth.views import LoginView
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/',include('django.contrib.auth.urls') ),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', views.home_view),
 
     path('adminclick', views.adminclick_view),
@@ -32,10 +32,10 @@ urlpatterns = [
 
     path('adminsignup', views.adminsignup_view),
     path('studentsignup', views.studentsignup_view),
-    path('adminlogin', LoginView.as_view(template_name='library/adminlogin.html')),
-    path('studentlogin', LoginView.as_view(template_name='library/studentlogin.html')),
+    path('adminlogin', views.admin_login_view),
+    path('studentlogin', views.student_login_view),
 
-    path('logout', LogoutView.as_view(template_name='library/index.html')),
+    path('logout', views.logout_view, name='logout'),
     path('afterlogin', views.afterlogin_view),
 
     path('addbook', views.addbook_view),
