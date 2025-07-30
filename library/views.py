@@ -26,6 +26,7 @@ def admin_login_view(request):
                 login(request, user)
                 return redirect('afterlogin')
             else:
+                
                 form.add_error(None, "This login is for administrators only.")
     else:
         form = AuthenticationForm()
